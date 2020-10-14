@@ -1,10 +1,10 @@
 import React from 'react';
-import '../assets/styles/games-list.scss';
+import '../styles/games-list.scss';
 
-const renderGameBlock = (data) => data.map(({image, name, price, description}) => (
-    <div className="game-block">
+const renderGameBlock = (data) => data.map(({ image, name, price, description, _id }) => (
+    <div className="game-block" key={_id}>
         <div className="photo-wrap">
-            <img className="photo" src={image}></img>
+            <img className="photo" src={image} alt={name} />
         </div>
         <div className="game-info-container">
             <div className="title">{name}</div>

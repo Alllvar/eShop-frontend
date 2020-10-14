@@ -4,12 +4,12 @@
     top: 72px;
 
     .navigation-container {
-        
         display: flex;
         flex-direction: column;
         list-style: none;
         margin: 0;
         padding: 0;
+
         .navigation-element {
             width: 72px;
             height: auto;
@@ -30,9 +30,11 @@
                 font-size: 40px;
             }
         }
+
         .navigation-element:hover {
             background-color: rgb(212, 0, 18);
         }
+
         .navigation-social {
             height: 48px;
             padding: 8px;
@@ -48,6 +50,7 @@
                 font-size: 30px;
             }
         }
+
         .navigation-social:hover {
             background-color: rgb(212, 0, 18);
         }

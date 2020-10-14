@@ -13,12 +13,11 @@
         width: 128px;
         height: 32px;
         cursor: pointer;
+
         .logo {
-            background: url('../images/header-logo.png');
             height: 100%;
             width: 100%;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: url('../assets/images/header-logo.png') no-repeat center;
             background-size: cover;
         }
     }
@@ -26,14 +25,13 @@
         margin-right: 50px;
         padding-right: 15px;
         border-right: 1px solid white;
-        .header-search-container {
-            .search {
-                padding-top: 4px;
-                width: 22px;
-                height: 22px;
-                color: white;
-                margin: auto;
-            }
+
+        .header-search-container .search {
+            padding-top: 4px;
+            width: 22px;
+            height: 22px;
+            color: white;
+            margin: auto;
         }
     }
 }

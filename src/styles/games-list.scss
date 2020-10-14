@@ -2,15 +2,18 @@
     display: flex;
     flex-direction: column;
     cursor: pointer;
+
     .game-block {
         display: flex;
         flex-direction: row;
         margin: 15px 0;
         padding-right: 30px;
+
         .photo-wrap {
             width: 100px;
             height: 100px;
             margin: 0 10px;
+
             .photo {
                 height: 100%;
                 width: 100%;
@@ -19,34 +22,36 @@
                 background-size: cover;
             }
         }
+
         .game-info-container {
             display: flex;
             flex-direction: column;
             width: 560px;
+            font-family: Arial, Helvetica, sans-serif;
+
             .title {
                 font-weight: 700;
                 font-size: 1.286rem;
                 color: rgb(51, 51, 51);
                 line-height: 1.15;
                 transition: color .25s cubic-bezier(.165, .84, .44, 1);
-                font-family: Arial, Helvetica, sans-serif;
-
             }
+
             .title:hover {
                 cursor: pointer;
                 text-decoration: underline;
             }
+
             .issue-date {
                 margin-top: 0;
                 margin-bottom: 8px;
                 color: rgb(153, 153, 153);
                 font-size: .7857rem;
                 font-weight: 300;
-                font-family: Arial, Helvetica, sans-serif;
             }
+
             .description {
                 color: rgb(51, 51, 51);
-                font-family: Arial, Helvetica, sans-serif;
             }
         }
     }

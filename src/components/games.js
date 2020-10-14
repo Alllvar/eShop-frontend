@@ -2,14 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import Filter from './filter';
 import GamesList from './games-list';
-import '../assets/styles/games.scss';
-
-
+import '../styles/games.scss';
 
 class Games extends React.Component {
     state = {
         products: []
-    }
+    };
+
     componentDidMount() {
         axios({
             method: 'get',
