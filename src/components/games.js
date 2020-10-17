@@ -6,7 +6,8 @@ import '../styles/games.scss';
 
 class Games extends React.Component {
     state = {
-        products: []
+        products: [],
+        categories:[]
     };
 
     componentDidMount() {
@@ -19,12 +20,21 @@ class Games extends React.Component {
                 products: response.data
             })
         });
+        axios({
+            method: 'get',
+            url: 'http://localhost:8081/categories',
+          })
+        .then((response) => {
+            this.setState({
+                categories: response.data
+            })
+        });
     }
 
     render() {
         return (
             <div className="products-page-container">
-                <Filter />
+                <Filter categories={this.state.categories}/>
                 <GamesList products={this.state.products} />
             </div>
         )

@@ -1,12 +1,11 @@
 import React from 'react';
-import { TYPE_NAMES } from '../constants/filter';
 import '../styles/filter.scss';
 
-const renderFilterElements = (data) => data.map(({ text, id }) => (
+const renderFilterElements = (data) => data.map(({ name, id }) => (
     <li className="filter-element" key={id}>
         <label>
-            <input type="checkbox" value={text} />
-            {text}
+            <input type="checkbox" value={name} />
+            {name}
         </label>
     </li>
 ));
@@ -18,7 +17,7 @@ class Filter extends React.Component {
                 <div className="filter-wrap">
                     <div className="filter-wrap-title">Тип носителя</div>
                     <ul className="filter-list">
-                        {renderFilterElements(TYPE_NAMES)}
+                        {renderFilterElements(this.props.categories)}
                     </ul>
                 </div>
             </div>
