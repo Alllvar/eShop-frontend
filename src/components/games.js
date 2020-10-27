@@ -7,7 +7,7 @@ import '../styles/games.scss';
 class Games extends React.Component {
     state = {
         products: [],
-        categories:[]
+        categories: []
     };
 
     componentDidMount() {
