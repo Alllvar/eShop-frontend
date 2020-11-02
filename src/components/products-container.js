@@ -39,6 +39,7 @@ class ProductsContainer extends React.Component {
     }
 
     getProductsByCategories(a) {
+        console.log(a, '======================A')
         axios({
             method: 'get',
             url: 'http://localhost:8081/products',
@@ -57,7 +58,6 @@ class ProductsContainer extends React.Component {
     }
 
     render() {
-        console.log(this.state.products, '=======================================')
         return (
             <div className="products-page-container">
                 <Filter categories={this.state.categories} handleFilterClick={(a) => this.getProductsByCategories(a)} />

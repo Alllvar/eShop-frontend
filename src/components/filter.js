@@ -17,15 +17,14 @@ class Filter extends React.Component {
         const isChecked = e.target.checked;
 
         if(isChecked) {
-            console.log('isChecked')
             return this.setState({
                 checkedItems: [...this.state.checkedItems, id]
-            }, (a) => this.props.handleFilterClick(a));
+            }, () => this.props.handleFilterClick(this.state.checkedItems));
         }
-        console.log('!isChecked')
+
         return this.setState({
             checkedItems: this.state.checkedItems.filter(checkedId => checkedId !== id)
-        }, (a) => this.props.handleFilterClick(a));
+        }, () => this.props.handleFilterClick(this.state.checkedItems));
     }
 
     renderFilterElements(data) {
