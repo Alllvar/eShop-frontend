@@ -1,34 +1,15 @@
 import React from 'react';
 import '../styles/filter.scss';
-import axios from 'axios';
-import qs from 'qs';
 
 class Filter extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            checkedItems: []
+            checkedItems: [],
         };
-
+        
         this.handleChange = this.handleChange.bind(this);
-        this.getProductsByCategories = this.getProductsByCategories.bind(this);
-    }
-
-    getProductsByCategories() {
-        axios({
-            method: 'get',
-            url: 'http://localhost:8081/products',
-            params: {
-                categoryId: this.state.checkedItems
-            },
-            paramsSerializer: params => {
-                return qs.stringify(params)
-            }
-        })
-            .then((response) => {
-                console.log(response.data)
-            });
     }
 
     handleChange(e) {
@@ -39,12 +20,12 @@ class Filter extends React.Component {
             console.log('isChecked')
             return this.setState({
                 checkedItems: [...this.state.checkedItems, id]
-            }, this.getProductsByCategories);
+            }, (a) => this.props.handleFilterClick(a));
         }
         console.log('!isChecked')
         return this.setState({
             checkedItems: this.state.checkedItems.filter(checkedId => checkedId !== id)
-        }, this.getProductsByCategories);
+        }, (a) => this.props.handleFilterClick(a));
     }
 
     renderFilterElements(data) {
@@ -62,6 +43,7 @@ class Filter extends React.Component {
             </li>
         ));
     }
+
     render() {
         return (
             <div className="filter-list-container">

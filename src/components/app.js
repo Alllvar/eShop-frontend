@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import Header from './header';
 import Navigation from './navigation';
-import Games from './games';
+import ProductsContainer from './products-container';
 import '../styles/app.scss';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
                         <Navigation/>
                         <Switch>
                             <Route exact path="/">
-                                <Games/>
+                                <ProductsContainer/>
                             </Route>
                         </Switch>
                     </div>
