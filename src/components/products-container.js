@@ -38,13 +38,12 @@ class ProductsContainer extends React.Component {
         });
     }
 
-    getProductsByCategories(a) {
-        console.log(a, '======================A')
+    getProductsByCategories(categories) {
         axios({
             method: 'get',
             url: 'http://localhost:8081/products',
             params: {
-                categoryId: a
+                categoryId: categories
             },
             paramsSerializer: params => {
                 return qs.stringify(params)
@@ -60,7 +59,10 @@ class ProductsContainer extends React.Component {
     render() {
         return (
             <div className="products-page-container">
-                <Filter categories={this.state.categories} handleFilterClick={(a) => this.getProductsByCategories(a)} />
+                <Filter
+                    categories={this.state.categories}
+                    handleFilterClick={(categories) => this.getProductsByCategories(categories)}
+                />
                 <GamesList products={this.state.products} />
             </div>
         )
