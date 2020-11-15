@@ -30,7 +30,7 @@ class PaginationContainer extends React.Component {
         // console.log(pagesQuantity);
 
         for (let i = 0; i <= pagesQuantity; i++) {
-            return <PaginationElement onChange={this.props.onChange} page={i} text={'Page 1'} />
+            return <PaginationElement onChange={() => this.props.onChange(i, 5)} page={i} text={`Page ${i+1}`} />
         }
 
         // console.log(this.state.products, '123123123')

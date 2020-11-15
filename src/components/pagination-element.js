@@ -15,11 +15,11 @@ class PaginationElement extends React.Component {
 
     handleInputFocus = () => {
         this.setState({ active: true });
-      };
-    
-      handleInputBlur = () => {
+    };
+
+    handleInputBlur = () => {
         this.setState({ active: false });
-      };
+    };
     
     getPageData(pageNumber) {
         // console.log(pageNumber)
