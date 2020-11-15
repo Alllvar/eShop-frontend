@@ -3,6 +3,7 @@ import axios from 'axios';
 import Filter from './filter';
 import ProductsList from './products-list';
 import PaginationContainer from './pagination-container';
+import { ITEMS_PER_PAGE } from '../constants/pagination';
 import qs from 'qs';
 import '../styles/products-container.scss';
 
@@ -14,6 +15,7 @@ class ProductsContainer extends React.Component {
             products: [],
             categories: []
         };
+
         this.updateProductsList = this.updateProductsList.bind(this);
         this.getProductsByCategories = this.getProductsByCategories.bind(this);
     }
@@ -23,7 +25,7 @@ class ProductsContainer extends React.Component {
             method: 'get',
             url: 'http://localhost:8081/products',
             params: {
-                limit: 5, 
+                limit: ITEMS_PER_PAGE,
                 skip: 0 
             },
             paramsSerializer: params => {
@@ -35,6 +37,7 @@ class ProductsContainer extends React.Component {
                 products: response.data
             })
         });
+
         axios({
             method: 'get',
             url: 'http://localhost:8081/categories',
@@ -91,7 +94,7 @@ class ProductsContainer extends React.Component {
                 />
                 <div>
                     <ProductsList products={this.state.products} />
-                    <PaginationContainer onChange={this.updateProductsList}/>
+                    <PaginationContainer onChange={this.updateProductsList} />
                 </div>
             </div>
         )

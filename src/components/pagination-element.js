@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/pagination-element.scss';
-
-const ITEMS_PER_PAGE = 5;
+import { ITEMS_PER_PAGE } from '../constants/pagination';
 
 class PaginationElement extends React.Component {
     constructor(props) {
