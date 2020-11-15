@@ -1,5 +1,5 @@
 import React from 'react';
-import NAV_NAMES from '../constants/navigation';
+import { NAV_NAMES } from '../constants/navigation';
 import '../styles/navigation.scss';
 
 const renderNavNames = (data) => data.map(({ text, icon, className, id }) => (

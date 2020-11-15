@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/games-list.scss';
+import '../styles/products-list.scss';
 
 const renderGameBlock = (data) => data.map(({ image, name, price, description, _id }) => (
     <div className="game-block" key={_id}>
@@ -14,7 +14,8 @@ const renderGameBlock = (data) => data.map(({ image, name, price, description, _
     </div>
 ));
 
-class GamesList extends React.Component {
+class ProductsList extends React.Component {
+
     render() {
         return (
             <div className="games-list-container">
@@ -24,4 +25,4 @@ class GamesList extends React.Component {
     }
 }
 
-export default GamesList;
+export default ProductsList;

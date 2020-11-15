@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Filter from './filter';
-import GamesList from './games-list';
+import ProductsList from './products-list';
+import PaginationContainer from './pagination-container';
 import qs from 'qs';
 import '../styles/products-container.scss';
 
@@ -13,7 +14,7 @@ class ProductsContainer extends React.Component {
             products: [],
             categories: []
         };
-
+        this.updateProductsList = this.updateProductsList.bind(this);
         this.getProductsByCategories = this.getProductsByCategories.bind(this);
     }
 
@@ -21,6 +22,13 @@ class ProductsContainer extends React.Component {
         axios({
             method: 'get',
             url: 'http://localhost:8081/products',
+            params: {
+                limit: 5, 
+                skip: 0 
+            },
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
           })
         .then((response) => {
             this.setState({
@@ -56,6 +64,24 @@ class ProductsContainer extends React.Component {
         }); 
     }
 
+    updateProductsList(limit, skip) {
+        axios({
+            method: 'get',
+            url: 'http://localhost:8081/products',
+            params: {
+                limit, skip
+            },
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
+        })
+        .then((response) => {
+            this.setState({
+                products: response.data
+            })
+        }); 
+    }
+    
     render() {
         return (
             <div className="products-page-container">
@@ -63,7 +89,10 @@ class ProductsContainer extends React.Component {
                     categories={this.state.categories}
                     handleFilterClick={(categories) => this.getProductsByCategories(categories)}
                 />
-                <GamesList products={this.state.products} />
+                <div>
+                    <ProductsList products={this.state.products} />
+                    <PaginationContainer onChange={this.updateProductsList}/>
+                </div>
             </div>
         )
     }

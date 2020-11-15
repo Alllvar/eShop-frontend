@@ -4,7 +4,7 @@ import { BsThreeDots, BsFillPuzzleFill, BsQuestionSquare} from 'react-icons/bs';
 import { RiShoppingBagLine, RiNewspaperLine, RiGamepadLine } from 'react-icons/ri';
 import { HiOutlineShoppingCart } from 'react-icons/hi';
 
-const NAV_NAMES = [
+export const NAV_NAMES = [
     {
         id: 1,
         className: "navigation-element",
@@ -53,4 +53,4 @@ const NAV_NAMES = [
     }
 ];
 
-export default NAV_NAMES;
+// export default NAV_NAMES;

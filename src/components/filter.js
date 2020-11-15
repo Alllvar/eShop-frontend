@@ -9,7 +9,7 @@ class Filter extends React.Component {
             checkedItems: [],
         };
         
-        this.handleChange = this.handleChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {
