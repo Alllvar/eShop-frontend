@@ -3,7 +3,6 @@ import axios from 'axios';
 import Filter from './filter';
 import ProductsList from './products-list';
 import PaginationContainer from './pagination-container';
-import { ITEMS_PER_PAGE } from '../constants/pagination';
 import qs from 'qs';
 import '../styles/products-container.scss';
 
@@ -16,28 +15,11 @@ class ProductsContainer extends React.Component {
             categories: []
         };
 
-        this.updateProductsList = this.updateProductsList.bind(this);
-        this.getProductsByCategories = this.getProductsByCategories.bind(this);
+        this.getProducts = this.getProducts.bind(this);
+        this.getProductsCount = this.getProductsCount.bind(this);
     }
 
     componentDidMount() {
-        axios({
-            method: 'get',
-            url: 'http://localhost:8081/products',
-            params: {
-                limit: ITEMS_PER_PAGE,
-                skip: 0 
-            },
-            paramsSerializer: params => {
-                return qs.stringify(params)
-            }
-          })
-        .then((response) => {
-            this.setState({
-                products: response.data
-            })
-        });
-
         axios({
             method: 'get',
             url: 'http://localhost:8081/categories',
@@ -49,30 +31,20 @@ class ProductsContainer extends React.Component {
         });
     }
 
-    getProductsByCategories(categories) {
+    getProductsCount(callback) {
         axios({
             method: 'get',
-            url: 'http://localhost:8081/products',
-            params: {
-                categoryId: categories
-            },
-            paramsSerializer: params => {
-                return qs.stringify(params)
-            }
+            url: 'http://localhost:8081/products/count',
         })
-        .then((response) => {
-            this.setState({
-                products: response.data
-            })
-        }); 
+            .then((response) => callback(response.data));
     }
 
-    updateProductsList(limit, skip) {
+    getProducts({ limit, skip, categoryId }) {
         axios({
             method: 'get',
             url: 'http://localhost:8081/products',
             params: {
-                limit, skip
+                limit, skip, categoryId
             },
             paramsSerializer: params => {
                 return qs.stringify(params)
@@ -90,11 +62,14 @@ class ProductsContainer extends React.Component {
             <div className="products-page-container">
                 <Filter
                     categories={this.state.categories}
-                    handleFilterClick={(categories) => this.getProductsByCategories(categories)}
+                    handleFilterClick={(categoryId) => this.getProducts({ categoryId })}
                 />
                 <div>
                     <ProductsList products={this.state.products} />
-                    <PaginationContainer onChange={this.updateProductsList} />
+                    <PaginationContainer
+                        getItemsCount={this.getProductsCount}
+                        onChange={(limit, skip) => this.getProducts({ limit, skip })}
+                    />
                 </div>
             </div>
         )

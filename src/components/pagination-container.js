@@ -1,6 +1,5 @@
 import React from 'react';
 import PaginationElement from './pagination-element';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ITEMS_PER_PAGE } from '../constants/pagination';
 
@@ -9,33 +8,43 @@ class PaginationContainer extends React.Component {
         super(props);
 
         this.state = {
-            count: 0
+            count: 0,
+            activePage: 0
         };
         
-        this.productsCounter = this.productsCounter.bind(this);
+        this.renderButtons = this.renderButtons.bind(this);
+        this.setItemsCount = this.setItemsCount.bind(this);
+    }
+
+    setItemsCount(count) {
+        this.setState({ count })
     }
 
     componentDidMount() {
-        axios({
-            method: 'get',
-            url: 'http://localhost:8081/products/count',
-        })
-        .then((response) => {
-            this.setState({
-                count: response.data
-            })
-        }); 
+        this.props.getItemsCount(this.setItemsCount);
+
+        this.props.onChange(ITEMS_PER_PAGE, this.state.count * ITEMS_PER_PAGE);
     }
 
-    productsCounter() {
-        const pagesQuantity = Math.ceil(this.state.count / ITEMS_PER_PAGE);
-        const arr = Array(pagesQuantity).fill(null).map((_, i) => i);
+    onChange(pageCount) {
+        this.setState({ activePage: pageCount });
+        this.props.onChange(ITEMS_PER_PAGE, pageCount * ITEMS_PER_PAGE);
+    }
 
-        return arr.map(
-            (el, index) => <PaginationElement
-                key={index}
-                onChange={() => this.props.onChange(ITEMS_PER_PAGE, index * ITEMS_PER_PAGE)}
-                page={index} text={`Page ${index + 1}`}
+    renderButtons() {
+        const pagesQuantity = Math.ceil(this.state.count / ITEMS_PER_PAGE);
+        const pages = [];
+
+        for(let i = 0; i < pagesQuantity; i++) {
+            pages.push(i);
+        }
+
+        return pages.map(
+            (pageNumber) => <PaginationElement
+                key={pageNumber}
+                active={pageNumber === this.state.activePage}
+                onClick={() => this.onChange(pageNumber)}
+                page={pageNumber} text={`Page ${pageNumber + 1}`}
             />
         )
     }
@@ -43,7 +52,7 @@ class PaginationContainer extends React.Component {
     render() {
         return (
             <div className="d-flex flex-direction-column justify-content-between w-50 p-4">
-                {this.productsCounter()}
+                {this.renderButtons()}
             </div>
         );
     }

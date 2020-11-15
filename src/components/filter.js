@@ -8,8 +8,6 @@ class Filter extends React.Component {
         this.state = {
             checkedItems: [],
         };
-        
-        // this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {
