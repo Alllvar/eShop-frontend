@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/filter.scss';
 
 class Filter extends React.Component {
     constructor(props) {

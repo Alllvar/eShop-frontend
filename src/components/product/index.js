@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import '../styles/product.scss';
 
-function Product() {
+const Product = () => {
     const [data, setData] = useState({});
     const { id } = useParams();
 
@@ -17,7 +16,7 @@ function Product() {
     return (
         <div className="product-container">
             <div className="photo-wrap">
-                <img src={data.image} className="img" />
+                <img src={data.image} className="img" alt={data.name} width={300} />
             </div>
             <div className="product-content">
                 <h1 className="title">{data.name}</h1> 
@@ -26,6 +25,6 @@ function Product() {
             </div>
         </div>
     )
-}
+};
 
 export default Product;

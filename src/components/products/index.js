@@ -1,12 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import qs from 'qs';
-import Filter from './filter';
+import Filter from '../library/filter';
 import ProductsList from './products-list';
-import PaginationContainer from './pagination-container';
-import '../styles/products-container.scss';
+import Pagination from '../library/pagination';
 
-class ProductsContainer extends React.Component {
+class Products extends React.Component {
     constructor(props) {
         super(props);
 
@@ -85,7 +84,7 @@ class ProductsContainer extends React.Component {
                 />
                 <div className="products-page">
                     <ProductsList products={this.state.products} />
-                    <PaginationContainer
+                    <Pagination
                         getItemsCount={this.getProductsCount}
                         onChange={(limit, skip) => this.getProducts({ limit, skip })}
                     />
@@ -95,4 +94,4 @@ class ProductsContainer extends React.Component {
     }
 }
 
-export default ProductsContainer;
+export default Products;

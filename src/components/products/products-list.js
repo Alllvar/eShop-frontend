@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import '../styles/products-list.scss';
 
 const renderProducts = (data) => data.map(({ image, name, price, description, _id }) => (
     <div className="product" key={_id}>

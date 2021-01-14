@@ -1,9 +1,8 @@
 import React from 'react';
-import PaginationElement from './pagination-element';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { ITEMS_PER_PAGE } from '../constants/pagination';
+import PaginationElement from './element';
+import { ITEMS_PER_PAGE } from '../../../constants/pagination';
 
-class PaginationContainer extends React.Component {
+class Pagination extends React.Component {
     constructor(props) {
         super(props);
 
@@ -58,4 +57,4 @@ class PaginationContainer extends React.Component {
     }
 }
 
-export default PaginationContainer;
+export default Pagination;
