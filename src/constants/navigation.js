@@ -52,5 +52,3 @@ export const NAV_NAMES = [
         icon: <BsThreeDots className="nav-social-icon"/>
     }
 ];
-
-// export default NAV_NAMES;

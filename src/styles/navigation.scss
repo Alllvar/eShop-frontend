@@ -1,26 +1,19 @@
 .navigation {
-    background-color: rgb(111, 0, 9);
-    position: fixed;
-    top: 72px;
+    position: sticky;
+    top: 80px;
+    width: 75px;
+    background-color: #e60012;
+    float: left;
 
     .navigation-container {
         display: flex;
         flex-direction: column;
-        list-style: none;
-        margin: 0;
         padding: 0;
 
         .navigation-element {
             width: 72px;
-            height: auto;
-            margin-top: 1px;
-            background-color: rgb(230, 0, 18);
             color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 8px;
+            padding: 3px 8px;
             text-align: center;
             cursor: pointer;
             font-size: 12px;
@@ -32,13 +25,13 @@
         }
 
         .navigation-element:hover {
-            background-color: rgb(212, 0, 18);
+            background-color: #e60012;
         }
 
         .navigation-social {
             height: 48px;
             padding: 8px;
-            background-color: rgb(230, 0, 18);
+            background-color: #e60012;
             margin-top: 1px;
             display: flex;
             justify-content: center;

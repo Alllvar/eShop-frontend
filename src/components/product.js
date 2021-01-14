@@ -5,11 +5,10 @@ import '../styles/product.scss';
 
 function Product() {
     const [data, setData] = useState({});
-    let { id } = useParams();
+    const { id } = useParams();
 
     useEffect( () => {
         axios.get(`http://localhost:8081/products/${id}`)
-        
             .then(res => {
                 setData(res.data.result);
             })

@@ -1,20 +1,11 @@
 import React from 'react';
-import Product from './product'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useParams
-  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../styles/products-list.scss';
 
-const renderGameBlock = (data) => data.map(({ image, name, price, description, _id }) => (
-    <div className="game-block" key={_id}>
+const renderProducts = (data) => data.map(({ image, name, price, description, _id }) => (
+    <div className="product" key={_id}>
         <Link to={`/product/${_id}`}>
-            <div className="photo-wrap">
-                <img className="photo" src={image} alt={name} />
-            </div>
+            <img className="photo" src={image} alt={name} width={200} />
         </Link>
         <div className="game-info-container">
             <Link to={`/product/${_id}`}>
@@ -29,8 +20,8 @@ const renderGameBlock = (data) => data.map(({ image, name, price, description, _
 class ProductsList extends React.Component {
     render() {
         return (
-            <div className="games-list-container">
-                {renderGameBlock(this.props.products)}
+            <div className="product-list-container">
+                {renderProducts(this.props.products)}
             </div>
         )
     }

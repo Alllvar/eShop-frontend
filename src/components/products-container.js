@@ -1,17 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import qs from 'qs';
 import Filter from './filter';
 import ProductsList from './products-list';
 import PaginationContainer from './pagination-container';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-import qs from 'qs';
 import '../styles/products-container.scss';
-import Product from './product';
 
 class ProductsContainer extends React.Component {
     constructor(props) {
@@ -55,18 +48,19 @@ class ProductsContainer extends React.Component {
         if (limit) {
             this.setState({
                 limit, skip
-            })
+            });
             params.limit = limit;
             params.skip = skip;
             params.categoryId = this.state.categoryId
         } else {
             this.setState({
                 categoryId
-            })
+            });
             params.limit = this.state.limit;
             params.skip = this.state.skip;
             params.categoryId = categoryId
         }
+
         axios({
             method: 'get',
             url: 'http://localhost:8081/products',
@@ -84,28 +78,19 @@ class ProductsContainer extends React.Component {
     
     render() {
         return (
-            <Router>
-                <Switch>
-                    <Route exact path="/">
-                        <div className="products-page-container">
-                            <Filter
-                                categories={this.state.categories}
-                                handleFilterClick={(categoryId) => this.getProducts({ categoryId })}
-                            />
-                            <div className="products-page">
-                                <ProductsList products={this.state.products} />
-                                <PaginationContainer
-                                    getItemsCount={this.getProductsCount}
-                                    onChange={(limit, skip) => this.getProducts({ limit, skip })}
-                                />
-                            </div>
-                        </div>
-                    </Route>
-                    <Route path="/product/:id">
-                        <Product />
-                    </Route>
-                </Switch>
-            </Router>
+            <div className="products-container">
+                <Filter
+                    categories={this.state.categories}
+                    handleFilterClick={(categoryId) => this.getProducts({ categoryId })}
+                />
+                <div className="products-page">
+                    <ProductsList products={this.state.products} />
+                    <PaginationContainer
+                        getItemsCount={this.getProductsCount}
+                        onChange={(limit, skip) => this.getProducts({ limit, skip })}
+                    />
+                </div>
+            </div>
         )
     }
 }

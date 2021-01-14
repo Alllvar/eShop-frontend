@@ -51,7 +51,7 @@ class PaginationContainer extends React.Component {
 
     render() {
         return (
-            <div className="d-flex flex-direction-column justify-content-between w-50 p-4">
+            <div>
                 {this.renderButtons()}
             </div>
         );

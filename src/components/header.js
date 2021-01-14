@@ -1,18 +1,15 @@
 import React from 'react';
 import { VscSearch } from 'react-icons/vsc';
+import logo from '../assets/images/header-logo.png';
 import '../styles/header.scss';
 
 class Header extends React.Component {
     render() {
         return (
             <div className="header">
-                <div className="header-logo">
-                    <div className="logo" />
-                </div>
-                <div className="header-right-container">
-                    <div className="header-search-container">
-                        <VscSearch className="search" />
-                    </div>
+                <img src={logo} width="128" />
+                <div className="search-container">
+                    <VscSearch className="search" />
                 </div>
             </div>
         )
