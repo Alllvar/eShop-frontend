@@ -1,7 +1,7 @@
 import React from 'react';
 import { PaginationElement } from './types';
 
-const PaginationElement = ({ active = false, onClick, text }: PaginationElement) => {
+const PaginationElement = ({ active = false, onClick, text }: PaginationElement): JSX.Element => {
     return (
         <div className="pagination-container">
             <button

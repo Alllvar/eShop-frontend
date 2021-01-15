@@ -6,7 +6,7 @@ import fetch from '../../library/fetch';
 
 const DEFAULT_PAGINATION_PARAMS = { limit: 5, skip: 0 };
 
-const Products = () => {
+const Products = (): JSX.Element => {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [{ limit, skip }, setPaginationParams] = useState(DEFAULT_PAGINATION_PARAMS);
@@ -22,7 +22,7 @@ const Products = () => {
             .then((response) => callback(response));
     };
 
-    const getProducts = (params: any) => {
+    const getProducts = (params: { categoryId?: string[], skip?: number, limit?: number }) => {
         const queryParams = { skip, limit, categoryId };
 
         if (limit) {
@@ -51,7 +51,7 @@ const Products = () => {
         <div className="products-container">
             <Filter
                 categories={categories}
-                handleFilterClick={(id: string[]) => { getProducts({ categoryId }) }}
+                handleFilterClick={(categoryId: string[]) => { getProducts({ categoryId }) }}
             />
             <ProductsList products={products} />
             <Pagination

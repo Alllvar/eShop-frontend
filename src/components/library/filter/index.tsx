@@ -5,7 +5,7 @@ type Props = {
     categories: { name: string, _id: string }[]
 }
 
-const Filter = ({ handleFilterClick, categories }: Props) => {
+const Filter = ({ handleFilterClick, categories }: Props): JSX.Element => {
     const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
     useEffect(() => {

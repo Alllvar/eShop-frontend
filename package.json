@@ -4,12 +4,16 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "webpack serve --hot --config webpack.config.js"
+    "start": "webpack serve --hot --config webpack.config.js",
+    "lint": "eslint ./src/**/*.{ts,tsx}"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Alllvar/eShop-frontend.git"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -33,9 +37,13 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.7",
     "@types/webpack-dev-server": "^3.11.1",
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
+    "@typescript-eslint/parser": "^4.13.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
     "dotenv-webpack": "^6.0.0",
+    "eslint": "^7.17.0",
+    "eslint-plugin-react": "^7.22.0",
     "html-webpack-plugin": "^4.5.1",
     "pre-commit": "^1.2.2",
     "react-hot-loader": "^4.13.0",

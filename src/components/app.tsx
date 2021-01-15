@@ -7,7 +7,7 @@ import {
 import Products from './products';
 import Product from './product';
 
-function App() {
+const App = (): JSX.Element => {
     return (
         <div className="app">
             <Router>

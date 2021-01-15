@@ -17,7 +17,7 @@ const renderProducts = (data: Product[]) => data.map(({ image, name, price, desc
     </div>
 ));
 
-const ProductsList = ({ products }: { products: Product[] }) => {
+const ProductsList = ({ products }: { products: Product[] }): JSX.Element => {
     return (
         <div className="product-list-container">
             {renderProducts(products)}
