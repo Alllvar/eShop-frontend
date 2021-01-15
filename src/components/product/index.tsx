@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import fetch from '../../library/fetch';
+import { Product } from './types';
 
 const Product = (): JSX.Element | null => {
-    const [data, setData] = useState<{ image: string, name: string, price: number, description: string } | null>(null);
+    const [data, setData] = useState<Product | null>(null);
     const { id } = useParams<{ id: string }>();
 
     useEffect( () => {

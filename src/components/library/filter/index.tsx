@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { FilterProps, FilterElement } from './types';
 
-type Props = {
-    handleFilterClick: (id: string[]) => void,
-    categories: { name: string, _id: string }[]
-}
-
-const Filter = ({ handleFilterClick, categories }: Props): JSX.Element => {
+const Filter = ({ handleFilterClick, categories }: FilterProps): JSX.Element => {
     const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
     useEffect(() => {
@@ -23,8 +19,8 @@ const Filter = ({ handleFilterClick, categories }: Props): JSX.Element => {
         return setCheckedItems(checkedItems.filter((checkedId: string) => checkedId !== id));
     };
 
-    const renderFilterElements = (data: Array<{ name: string, _id: string }>) => {
-        return data.map(({ name, _id }: { name: string, _id: string }) => (
+    const renderFilterElements = (data: FilterElement[]) => {
+        return data.map(({ name, _id }) => (
             <li className="filter-element" key={_id}>
                 <label>
                     <input

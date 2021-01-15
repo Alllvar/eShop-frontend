@@ -10,7 +10,7 @@ const Products = (): JSX.Element => {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [{ limit, skip }, setPaginationParams] = useState(DEFAULT_PAGINATION_PARAMS);
-    const [categoryId, setCategoryId] = useState(null);
+    const [categoryId, setCategoryId] = useState<string[] | null>(null);
 
     useEffect(() => {
         fetch('/categories')
@@ -22,18 +22,17 @@ const Products = (): JSX.Element => {
             .then((response) => callback(response));
     };
 
-    const getProducts = (params: { categoryId?: string[], skip?: number, limit?: number }) => {
+    const getProducts = (params: { categoryId?: string[] | null, skip?: number, limit?: number }) => {
         const queryParams = { skip, limit, categoryId };
 
-        if (limit) {
+        if (params.limit && params.skip) {
             setPaginationParams({
                 limit, skip
             });
 
             queryParams.limit = params.limit;
             queryParams.skip = params.skip;
-
-        } else {
+        } else if (params.categoryId) {
             setCategoryId(categoryId);
 
             queryParams.categoryId = params.categoryId

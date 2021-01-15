@@ -1,13 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PaginationElement from './element';
 import { ITEMS_PER_PAGE } from '../../../constants/pagination';
+import { PaginationProps } from './types';
 
-type Props = {
-    getItemsCount: (callback: (count: number) => void) => void,
-    onChange: (limit: number, skip: number) => void
-}
-
-const Pagination = ({ getItemsCount, onChange }: Props): JSX.Element => {
+const Pagination = ({ getItemsCount, onChange }: PaginationProps): JSX.Element => {
     const [count, setCount] = useState(0);
     const [activePage, setActivePage] = useState(0);
 

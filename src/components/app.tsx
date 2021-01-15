@@ -22,6 +22,6 @@ const App = (): JSX.Element => {
             </Router>
         </div>
     );
-}
+};
 
 export default App;
