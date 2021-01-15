@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { Product } from './types';
 
-const renderProducts = (data) => data.map(({ image, name, price, description, _id }) => (
+const renderProducts = (data: Product[]) => data.map(({ image, name, price, description, _id }) => (
     <div className="product" key={_id}>
         <Link to={`/product/${_id}`}>
             <img className="photo" src={image} alt={name} width={200} />
@@ -16,14 +17,12 @@ const renderProducts = (data) => data.map(({ image, name, price, description, _i
     </div>
 ));
 
-class ProductsList extends React.Component {
-    render() {
-        return (
-            <div className="product-list-container">
-                {renderProducts(this.props.products)}
-            </div>
-        )
-    }
-}
+const ProductsList = ({ products }: { products: Product[] }) => {
+    return (
+        <div className="product-list-container">
+            {renderProducts(products)}
+        </div>
+    )
+};
 
 export default ProductsList;

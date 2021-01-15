@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "outDir": "./dist",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "target": "es5",
+    "jsx": "react",
+    "module": "es6",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "sourceMap": true
+  },
+  "include": ["src/index.tsx"],
+  "exclude": ["node_modules"]
+}

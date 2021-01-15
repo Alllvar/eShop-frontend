@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 import Products from './products';
 import Product from './product';
-import '../styles/index.scss';
 
 function App() {
     return (

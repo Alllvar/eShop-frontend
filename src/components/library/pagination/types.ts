@@ -1,0 +1,1 @@
+export type PaginationElement = { active?: boolean, onClick: () => void, text: string };
