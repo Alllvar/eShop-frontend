@@ -1,5 +1,5 @@
 import fetch from '../../library/fetch'
-import { addProducts, addProductsCount, addProduct } from '../reducers/products';
+import { addProducts, addProductsCount, addProduct } from '../slices/products';
 import type { Product } from '../../schemas/product';
 import type { AppThunk, AppDispatch } from '../types';
 

@@ -5,12 +5,12 @@ import { push } from 'connected-react-router';
 import Filter from '../library/filter';
 import Pagination from '../library/pagination';
 import ProductsList from './products-list';
-import { getCategories } from '../../redux/actions/categories';
-import { getProducts, getProductsCount } from '../../redux/actions/products';
+import { getCategories } from '../../store/thunk-actions/categories';
+import { getProducts, getProductsCount } from '../../store/thunk-actions/products';
 import { ITEMS_PER_PAGE } from '../../constants/pagination';
-import { resetProducts } from '../../redux/reducers/products';
+import { resetProducts } from '../../store/slices/products';
 import { ProductsContainer } from './products.styled';
-import type { RootState } from '../../redux/types';
+import type { RootState } from '../../store/types';
 
 const Products = (): JSX.Element => {
     const dispatch = useDispatch();

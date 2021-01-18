@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ConnectedRouterProps } from 'connected-react-router';
-import { getProductById } from '../../redux/actions/products';
-import { resetProducts } from '../../redux/reducers/products';
-import { RootState } from '../../redux/types';
+import { getProductById } from '../../store/thunk-actions/products';
+import { resetProducts } from '../../store/slices/products';
+import type { RootState } from '../../store/types';
 
 const Product = (props: ConnectedRouterProps): JSX.Element | null => {
     const { id } = useParams<{ id: string }>();

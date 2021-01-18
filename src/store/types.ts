@@ -1,4 +1,4 @@
-import store, { rootReducer } from './store';
+import store, { rootReducer } from './index';
 import type { ThunkAction } from 'redux-thunk';
 import type { Action } from '@reduxjs/toolkit';
 

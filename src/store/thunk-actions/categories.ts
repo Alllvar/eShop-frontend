@@ -1,5 +1,5 @@
 import fetch from '../../library/fetch'
-import { addCategories } from '../reducers/categories';
+import { addCategories } from '../slices/categories';
 import type { AppThunk, AppDispatch } from '../types';
 import type { Category } from '../../schemas/category';
 
