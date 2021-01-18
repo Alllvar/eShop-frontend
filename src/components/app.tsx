@@ -12,12 +12,11 @@ const App = (): JSX.Element => {
         <div className="app">
             <Router>
                 <Switch>
+
                     <Route exact path="/">
                         <Products />
                     </Route>
-                    <Route path="/product/:id">
-                        <Product />
-                    </Route>
+                    <Route path="/:id" render={(props) => <Product { ...props }/>}/>
                 </Switch>
             </Router>
         </div>

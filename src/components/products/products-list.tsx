@@ -8,8 +8,8 @@ const renderProducts = (data: Product[]) => data.map(({ image, name, price, desc
             <img className="photo" src={image} alt={name} width={200} />
         </Link>
         <div className="game-info-container">
-            <Link to={`/product/${_id}`}>
-                <div className="title">{name}</div> 
+            <Link to={`/${_id}`}>
+                <div className="title">{name}</div>
             </Link>
             <div className="issue-date">{price}$</div>
             <div className="description">{description}</div>

@@ -8,30 +8,31 @@ import ProductsList from './products-list';
 import { getCategories } from '../../redux/actions/categories';
 import { getProducts, getProductsCount } from '../../redux/actions/products';
 import { RootState } from '../../redux/types';
+import { ITEMS_PER_PAGE } from '../../constants/pagination';
+import { resetProducts } from '../../redux/reducers/products';
 
 const Products = (): JSX.Element => {
     const dispatch = useDispatch();
     const { search } = useSelector(
         (state: RootState) => state.router.location
     );
-    const { page = '1', categoryId } = qs.parse(search, { parseArrays: true, ignoreQueryPrefix: true });
     const categories = useSelector(
         (state: RootState) => state.categories.data
     );
-
     const products = useSelector(
         (state: RootState) => state.products.data
     );
     const productsCount = useSelector(
         (state: RootState) => state.products.count
     );
+    const { page = '1', categoryId } = qs.parse(search, { parseArrays: true, ignoreQueryPrefix: true });
 
     useEffect(() => {
         dispatch(
             getProducts(
                 {
-                    limit: 1,
-                    skip: parseInt(page as string) * 1,
+                    limit: ITEMS_PER_PAGE,
+                    skip: (parseInt(page as string) - 1) * ITEMS_PER_PAGE,
                     categoryId: categoryId as string[] || [],
                 }
             )
@@ -42,6 +43,10 @@ const Products = (): JSX.Element => {
     useEffect(() => {
         dispatch(getCategories());
         dispatch(getProductsCount());
+
+        return () => {
+            dispatch(resetProducts())
+        }
     }, []);
 
     const handleFilterClick = (categoryId: string[] = []) => {
@@ -77,7 +82,7 @@ const Products = (): JSX.Element => {
                 total={productsCount}
                 onChange={handlePageClick}
                 page={parseInt(page as string)}
-                perPage={1}
+                perPage={ITEMS_PER_PAGE}
             />
         </div>
     )
