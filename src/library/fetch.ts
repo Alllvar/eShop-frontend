@@ -12,8 +12,9 @@ const handleResponse = (response: Response) => {
 };
 
 type Params = { body?: any, headers?: any, method?: string, queryParams?: any };
+type Fetch<P> = (params: Params) => Promise<P>;
 
-export default async function (
+export default async function Fetch<P>(
     endPoint: string,
     { body, headers: requestHeaders , method = 'GET', queryParams }: Params = {}
 ) {

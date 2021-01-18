@@ -4,19 +4,23 @@ import { FilterProps, FilterElement } from './types';
 const Filter = ({ handleFilterClick, categories }: FilterProps): JSX.Element => {
     const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
-    useEffect(() => {
-        handleFilterClick(checkedItems)
-    }, [checkedItems]);
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const id = e.target.value;
         const isChecked = e.target.checked;
 
         if(isChecked) {
-            return setCheckedItems([...checkedItems, id])
+            const result = [...checkedItems, id];
+
+            setCheckedItems(result);
+
+            return handleFilterClick(result)
         }
 
-        return setCheckedItems(checkedItems.filter((checkedId: string) => checkedId !== id));
+        const result = checkedItems.filter((checkedId: string) => checkedId !== id);
+
+        setCheckedItems(result);
+
+        return handleFilterClick(result);
     };
 
     const renderFilterElements = (data: FilterElement[]) => {

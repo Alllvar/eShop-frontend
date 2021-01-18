@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import { Product } from '../product/types';
+import { Link } from 'react-router-dom';
+import { Product } from '../../schemas/product';
 
 const renderProducts = (data: Product[]) => data.map(({ image, name, price, description, _id }) => (
     <div className="product" key={_id}>

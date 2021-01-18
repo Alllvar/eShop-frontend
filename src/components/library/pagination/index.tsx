@@ -1,24 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PaginationElement from './element';
-import { ITEMS_PER_PAGE } from '../../../constants/pagination';
 import { PaginationProps } from './types';
 
-const Pagination = ({ getItemsCount, onChange }: PaginationProps): JSX.Element => {
-    const [count, setCount] = useState(0);
-    const [activePage, setActivePage] = useState(0);
-
-    useEffect(() => {
-        getItemsCount(setCount);
-        onChange(ITEMS_PER_PAGE, count * ITEMS_PER_PAGE)
-    }, []);
-
-    const onPageChange = (pageCount: number) => {
-        setActivePage(pageCount);
-        onChange(ITEMS_PER_PAGE, pageCount * ITEMS_PER_PAGE);
+const Pagination = ({ total, onChange, page , perPage }: PaginationProps): JSX.Element => {
+    const onPageChange = (page: number) => {
+        onChange(page);
     };
 
     const renderButtons = () => {
-        const pagesQuantity = Math.ceil(count / ITEMS_PER_PAGE);
+        const pagesQuantity = Math.ceil(total / perPage);
         const pages = [];
 
         for (let i = 0; i < pagesQuantity; i++) {
@@ -27,9 +17,9 @@ const Pagination = ({ getItemsCount, onChange }: PaginationProps): JSX.Element =
 
         return pages.map(
             (pageNumber) => <PaginationElement
-                key={pageNumber}
-                active={pageNumber === activePage}
-                onClick={() => onPageChange(pageNumber)}
+                key={pageNumber + 1}
+                active={pageNumber + 1 === page}
+                onClick={() => onPageChange(pageNumber + 1)}
                 text={`Page ${pageNumber + 1}`}
             />
         )

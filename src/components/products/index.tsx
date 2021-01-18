@@ -1,61 +1,83 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import qs from 'qs';
+import { push } from 'connected-react-router';
 import Filter from '../library/filter';
-import ProductsList from './products-list';
 import Pagination from '../library/pagination';
-import fetch from '../../library/fetch';
-
-const DEFAULT_PAGINATION_PARAMS = { limit: 5, skip: 0 };
+import ProductsList from './products-list';
+import { getCategories } from '../../redux/actions/categories';
+import { getProducts, getProductsCount } from '../../redux/actions/products';
+import { RootState } from '../../redux/types';
 
 const Products = (): JSX.Element => {
-    const [categories, setCategories] = useState([]);
-    const [products, setProducts] = useState([]);
-    const [{ limit, skip }, setPaginationParams] = useState(DEFAULT_PAGINATION_PARAMS);
-    const [categoryId, setCategoryId] = useState<string[] | null>(null);
+    const dispatch = useDispatch();
+    const { search } = useSelector(
+        (state: RootState) => state.router.location
+    );
+    const { page = '1', categoryId } = qs.parse(search, { parseArrays: true, ignoreQueryPrefix: true });
+    const categories = useSelector(
+        (state: RootState) => state.categories.data
+    );
+
+    const products = useSelector(
+        (state: RootState) => state.products.data
+    );
+    const productsCount = useSelector(
+        (state: RootState) => state.products.count
+    );
 
     useEffect(() => {
-        fetch('/categories')
-            .then((response) => setCategories(response));
+        dispatch(
+            getProducts(
+                {
+                    limit: 1,
+                    skip: parseInt(page as string) * 1,
+                    categoryId: categoryId as string[] || [],
+                }
+            )
+        );
+        dispatch(getProductsCount(categoryId as string[] || []));
+    }, [search]);
+
+    useEffect(() => {
+        dispatch(getCategories());
+        dispatch(getProductsCount());
     }, []);
 
-    const getProductsCount = (callback: (count: number) => void) => {
-        fetch('/products/count')
-            .then((response) => callback(response));
+    const handleFilterClick = (categoryId: string[] = []) => {
+        dispatch(
+            push({
+                search: qs.stringify(
+                    { categoryId, page: 1 },
+                    { addQueryPrefix: true, skipNulls: true }
+                )
+            })
+        )
     };
 
-    const getProducts = (params: { categoryId?: string[] | null, skip?: number, limit?: number }) => {
-        const queryParams = { skip, limit, categoryId };
-
-        if (params.limit && params.skip) {
-            setPaginationParams({
-                limit, skip
-            });
-
-            queryParams.limit = params.limit;
-            queryParams.skip = params.skip;
-        } else if (params.categoryId) {
-            setCategoryId(categoryId);
-
-            queryParams.categoryId = params.categoryId
-        }
-
-        fetch('/products', {
-            queryParams,
-        })
-            .then((response) => {
-                setProducts(response)
-            });
+    const handlePageClick = (page: number) => {
+        dispatch(
+            push({
+                search: qs.stringify(
+                    { categoryId, page },
+                    { addQueryPrefix: true, skipNulls: true }
+                )
+            })
+        )
     };
 
     return (
         <div className="products-container">
             <Filter
                 categories={categories}
-                handleFilterClick={(categoryId: string[]) => { getProducts({ categoryId }) }}
+                handleFilterClick={handleFilterClick}
             />
             <ProductsList products={products} />
             <Pagination
-                getItemsCount={getProductsCount}
-                onChange={(limit, skip) => getProducts({ limit, skip })}
+                total={productsCount}
+                onChange={handlePageClick}
+                page={parseInt(page as string)}
+                perPage={1}
             />
         </div>
     )
