@@ -9,6 +9,7 @@ import { getCategories } from '../../redux/actions/categories';
 import { getProducts, getProductsCount } from '../../redux/actions/products';
 import { ITEMS_PER_PAGE } from '../../constants/pagination';
 import { resetProducts } from '../../redux/reducers/products';
+import { ProductsContainer } from './products.styled';
 import type { RootState } from '../../redux/types';
 
 const Products = (): JSX.Element => {
@@ -72,19 +73,21 @@ const Products = (): JSX.Element => {
     };
 
     return (
-        <div className="products-container">
-            <Filter
-                categories={categories}
-                handleFilterClick={handleFilterClick}
-            />
-            <ProductsList products={products} />
+        <>
+            <ProductsContainer>
+                <Filter
+                    categories={categories}
+                    handleFilterClick={handleFilterClick}
+                />
+                <ProductsList products={products} />
+            </ProductsContainer>
             <Pagination
                 total={productsCount}
                 onChange={handlePageClick}
                 page={parseInt(page as string)}
                 perPage={ITEMS_PER_PAGE}
             />
-        </div>
+        </>
     )
 };
 
