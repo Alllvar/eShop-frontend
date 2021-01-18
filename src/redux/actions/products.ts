@@ -1,7 +1,6 @@
 import fetch from '../../library/fetch'
-import { Product } from '../../schemas/product';
-import { createAction } from '@reduxjs/toolkit';
 import { addProducts, addProductsCount, addProduct } from '../reducers/products';
+import type { Product } from '../../schemas/product';
 import type { AppThunk, AppDispatch } from '../types';
 
 export const getProducts = (queryParams: { skip?: number, limit?: number, categoryId?: string[] }): AppThunk => async (dispatch: AppDispatch) => {

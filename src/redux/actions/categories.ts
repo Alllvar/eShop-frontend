@@ -1,7 +1,7 @@
 import fetch from '../../library/fetch'
-import { Category } from '../../schemas/category';
-import { AppThunk, AppDispatch } from '../types';
 import { addCategories } from '../reducers/categories';
+import type { AppThunk, AppDispatch } from '../types';
+import type { Category } from '../../schemas/category';
 
 export const getCategories = (): AppThunk => async (dispatch: AppDispatch) => {
     const result: Category[] = await fetch('/categories');

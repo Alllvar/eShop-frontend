@@ -1,6 +1,6 @@
 import React from 'react';
 import PaginationElement from './element';
-import { PaginationProps } from './types';
+import type { PaginationProps } from './types';
 
 const Pagination = ({ total, onChange, page , perPage }: PaginationProps): JSX.Element => {
     const onPageChange = (page: number) => {

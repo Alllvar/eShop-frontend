@@ -1,1 +1,0 @@
-export const RESET_PRODUCTS = 'RESET_PRODUCTS';

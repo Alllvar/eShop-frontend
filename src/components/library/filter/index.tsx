@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { FilterProps, FilterElement } from './types';
 
 const Filter = ({ handleFilterClick, categories }: FilterProps): JSX.Element => {

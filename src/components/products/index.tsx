@@ -7,9 +7,9 @@ import Pagination from '../library/pagination';
 import ProductsList from './products-list';
 import { getCategories } from '../../redux/actions/categories';
 import { getProducts, getProductsCount } from '../../redux/actions/products';
-import { RootState } from '../../redux/types';
 import { ITEMS_PER_PAGE } from '../../constants/pagination';
 import { resetProducts } from '../../redux/reducers/products';
+import type { RootState } from '../../redux/types';
 
 const Products = (): JSX.Element => {
     const dispatch = useDispatch();

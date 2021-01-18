@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Product } from '../../schemas/product';
-import { RESET_PRODUCTS } from '../../constants/actions';
 
 const initialState : { data: Product[], count: number } = { data: [], count: 0 };
 
