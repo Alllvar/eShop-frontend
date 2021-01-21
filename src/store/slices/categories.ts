@@ -4,13 +4,13 @@ import { Category } from '../../schemas/category';
 const initialState : { data: Category[], count: number } = { data: [], count: 0 };
 
 const categoriesSlice = createSlice({
-    name: 'categories',
-    initialState,
-    reducers: {
-        addCategories(state, action: PayloadAction<Category[]>) {
-            state.data = action.payload;
-        },
-    }
+  name: 'categories',
+  initialState,
+  reducers: {
+    addCategories(state, action: PayloadAction<Category[]>) {
+      state.data = action.payload;
+    },
+  },
 });
 
 export const { addCategories } = categoriesSlice.actions;

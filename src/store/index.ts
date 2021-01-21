@@ -1,22 +1,27 @@
 import { createBrowserHistory, History } from 'history';
-import { configureStore as configureAppStore, getDefaultMiddleware as GetDefaultMiddleware } from '@reduxjs/toolkit';
+import { Middleware } from 'redux';
+import {
+  configureStore as configureAppStore,
+  getDefaultMiddleware as GetDefaultMiddleware,
+  MiddlewareArray,
+} from '@reduxjs/toolkit';
 import { routerMiddleware } from 'connected-react-router';
 import createRootReducer from './slices';
 
-const middleware = (getDefaultMiddleware: typeof GetDefaultMiddleware) => getDefaultMiddleware()
-    .concat(routerMiddleware(history));
-
 export const history: History<any> = createBrowserHistory();
+// eslint-disable-next-line max-len
+const middleware = (getDefaultMiddleware: typeof GetDefaultMiddleware): MiddlewareArray<Middleware> => getDefaultMiddleware()
+  .concat(routerMiddleware(history));
 export const rootReducer = createRootReducer(history);
 
 function configureStore(preloadedState: any) {
-    return configureAppStore(
-        {
-            reducer: rootReducer,
-            preloadedState,
-            middleware
-        }
-    );
+  return configureAppStore(
+    {
+      reducer: rootReducer,
+      preloadedState,
+      middleware,
+    },
+  );
 }
 
 const store = configureStore({});

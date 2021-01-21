@@ -4,32 +4,33 @@ import qs from 'qs';
 const DEFAULT_HEADERS = { 'content-type': 'application/json' };
 
 const handleResponse = (response: Response) => {
-    if (response.ok) {
-        return response.json();
-    }
+  if (response.ok) {
+    return response.json();
+  }
 
-    throw new Error();
+  throw new Error();
 };
 
 type Params = { body?: any, headers?: any, method?: string, queryParams?: any };
 
 export default async function (
-    endPoint: string,
-    { body, headers: requestHeaders , method = 'GET', queryParams }: Params = {}
+  endPoint: string,
+  {
+    body, headers: requestHeaders, method = 'GET', queryParams,
+  }: Params = {},
 ) {
+  const headers: any = {
+    ...DEFAULT_HEADERS,
+    ...requestHeaders,
+  };
 
-    const headers: any = {
-        ...DEFAULT_HEADERS,
-        ...requestHeaders
-    };
+  const params: any = { headers, method };
 
-    const params: any = { headers, method };
+  if (body) {
+    params.body = JSON.stringify(body);
+  }
 
-    if (body) {
-        params.body = JSON.stringify(body);
-    }
+  const response = await fetch(`${process.env.API_URL}${endPoint}${queryParams ? `?${qs.stringify(queryParams)}` : ''}`, params);
 
-    const response = await fetch(`${process.env.API_URL}${endPoint}${queryParams ? '?' + qs.stringify(queryParams): ''}`, params);
-
-    return handleResponse(response);
+  return handleResponse(response);
 }
