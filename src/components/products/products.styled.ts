@@ -20,4 +20,3 @@ export const MainPageContainer = styled.div`
     justify-content: space-between;
     max-width: 1200px;
 `;
-

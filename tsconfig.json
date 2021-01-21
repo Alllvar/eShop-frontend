@@ -14,6 +14,6 @@
     "baseUrl": "./",
     "sourceMap": true
   },
-  "include": ["src/index.tsx"],
+  "include": ["src/index.tsx", "**/*.test.tsx"],
   "exclude": ["node_modules"]
 }

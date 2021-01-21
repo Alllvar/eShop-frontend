@@ -9,10 +9,6 @@ export const FilterListContainer = styled.div`
     color: white;
 `;
 
-export const Title = styled.h1`
-    
-`;
-
 export const FilterList = styled.ul`
     padding: 5px;
 `;
@@ -37,5 +33,3 @@ export const Input = styled.input`
     cursor: pointer;
     margin-right: 10px;
 `;
-
-
