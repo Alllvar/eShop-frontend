@@ -36,6 +36,7 @@ module.exports = {
         'linebreak-style': 0,
         'no-param-reassign': 0,
         'react/jsx-props-no-spreading': [2, { custom: 'ignore' }],
+        'react-hooks/exhaustive-deps': 0,
       },
     },
   ],

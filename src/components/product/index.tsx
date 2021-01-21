@@ -22,7 +22,7 @@ const Product = (props: ConnectedRouterProps): JSX.Element | null => {
     return () => {
       dispatch(resetProducts());
     };
-  });
+  }, []);
 
   return (
     product

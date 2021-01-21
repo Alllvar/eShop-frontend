@@ -39,7 +39,7 @@ const Products = (): JSX.Element => {
       ),
     );
     dispatch(getProductsCount(categoryId as string[] || []));
-  }, [search, dispatch, page, categoryId]);
+  }, []);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -48,7 +48,7 @@ const Products = (): JSX.Element => {
     return () => {
       dispatch(resetProducts());
     };
-  });
+  }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-shadow
   const handleFilterClick = (categoryId: string[] = []) => {
