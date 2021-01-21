@@ -13,20 +13,20 @@ export const ProductPhoto = styled.img`
     border-radius: 30px;
 `;
 
-export const GameInfoContainer = styled.div`
+export const ProductInfoContainer = styled.div`
     margin-left: 50px;
     width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    color: white;
+    color: #fff;
     font-family: Lucida Console, Courier, monospace;
 `;
 
 export const Title = styled.h1`
     text-decoration: none;
-    color: white;
+    color: #fff;
     
     &:hover {
         color: #FFDC00;

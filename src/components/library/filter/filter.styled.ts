@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 export const FilterListContainer = styled.div`
     position: fixed;
-    left: 0%;
+    left: 0;
     top: 10%;
     margin-left: 150px;
     font-family: Lucida Console, Courier, monospace;
-    color: white;
+    color: #fff;
 `;
 
 export const FilterList = styled.ul`
@@ -14,7 +14,7 @@ export const FilterList = styled.ul`
 `;
 
 export const FilterLiElement = styled.li`
-    list-style:none;
+    list-style: none;
     margin-bottom: 8px;
 `;
 

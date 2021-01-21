@@ -4,7 +4,7 @@ import { Product } from '../../schemas/product';
 import {
   ProductContainer,
   ProductPhoto,
-  GameInfoContainer,
+  ProductInfoContainer,
   Title,
   Price,
   Description,
@@ -17,7 +17,7 @@ const renderProducts = (data: Product[]) => data.map(({
     <Link to={`/${_id}`}>
       <ProductPhoto src={image} alt={name} />
     </Link>
-    <GameInfoContainer>
+    <ProductInfoContainer>
       <Link to={`/${_id}`} style={{ textDecoration: 'none' }}>
         <Title>{name}</Title>
       </Link>
@@ -26,7 +26,7 @@ const renderProducts = (data: Product[]) => data.map(({
         $
       </Price>
       <Description>{description}</Description>
-    </GameInfoContainer>
+    </ProductInfoContainer>
   </ProductContainer>
 ));
 
