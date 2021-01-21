@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import { FilterProps, FilterElement } from './types';
+import {
+  FilterLiElement,
+  FilterListContainer,
+  Title,
+  Label,
+  Input,
+  FilterList,
+} from './filter.styled';
 
 const Filter = ({ handleFilterClick, categories }: FilterProps): JSX.Element => {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
@@ -24,29 +32,26 @@ const Filter = ({ handleFilterClick, categories }: FilterProps): JSX.Element => 
   };
 
   const renderFilterElements = (data: FilterElement[]) => data.map(({ name, _id }) => (
-    <li className="filter-element" key={_id}>
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label>
-        <input
+    <FilterLiElement key={_id}>
+      <Label>
+        <Input
           type="checkbox"
           value={_id}
           checked={checkedItems.includes(_id)}
           onChange={(e) => { handleChange(e); }}
         />
         {name}
-      </label>
-    </li>
+      </Label>
+    </FilterLiElement>
   ));
 
   return (
-    <div className="filter-list-container">
-      <div className="filter-wrap">
-        <div className="filter-wrap-title">Тип носителя</div>
-        <ul className="filter-list">
-          {renderFilterElements(categories)}
-        </ul>
-      </div>
-    </div>
+    <FilterListContainer>
+      <Title>My filter</Title>
+      <FilterList>
+        {renderFilterElements(categories)}
+      </FilterList>
+    </FilterListContainer>
   );
 };
 

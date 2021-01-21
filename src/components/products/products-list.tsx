@@ -1,25 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../schemas/product';
+import {
+  ProductContainer,
+  ProductPhoto,
+  ProductInfoContainer,
+  Title,
+  Price,
+  Description,
+} from './product.styled';
 
 const renderProducts = (data: Product[]) => data.map(({
   image, name, price, description, _id,
 }) => (
-  <div className="product" key={_id}>
-    <Link to={`/product/${_id}`}>
-      <img className="photo" src={image} alt={name} width={200} />
+  <ProductContainer key={_id}>
+    <Link to={`/${_id}`}>
+      <ProductPhoto src={image} alt={name} />
     </Link>
-    <div className="game-info-container">
-      <Link to={`/${_id}`}>
-        <div className="title">{name}</div>
+    <ProductInfoContainer>
+      <Link to={`/${_id}`} style={{ textDecoration: 'none' }}>
+        <Title>{name}</Title>
       </Link>
-      <div className="issue-date">
+      <Price>
         {price}
         $
-      </div>
-      <div className="description">{description}</div>
-    </div>
-  </div>
+      </Price>
+      <Description>{description}</Description>
+    </ProductInfoContainer>
+  </ProductContainer>
 ));
 
 const ProductsList = ({ products }: { products: Product[] }): JSX.Element => (

@@ -1,6 +1,7 @@
 import React from 'react';
 import PaginationElement from './element';
 import type { PaginationProps } from './types';
+import { PaginationContainer } from './pagination.styled';
 
 const Pagination = ({
   total, onChange, page, perPage,
@@ -31,9 +32,9 @@ const Pagination = ({
   };
 
   return (
-    <>
+    <PaginationContainer>
       {renderButtons()}
-    </>
+    </PaginationContainer>
   );
 };
 

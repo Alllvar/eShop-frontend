@@ -9,7 +9,7 @@ import { getCategories } from '../../store/thunk-actions/categories';
 import { getProducts, getProductsCount } from '../../store/thunk-actions/products';
 import { ITEMS_PER_PAGE } from '../../constants/pagination';
 import { resetProducts } from '../../store/slices/products';
-import { ProductsContainer } from './products.styled';
+import { ProductsContainer, PaginationContainer, MainPageContainer } from './products.styled';
 import type { RootState } from '../../store/types';
 
 const Products = (): JSX.Element => {
@@ -75,7 +75,7 @@ const Products = (): JSX.Element => {
   };
 
   return (
-    <>
+    <MainPageContainer>
       <ProductsContainer>
         <Filter
           categories={categories}
@@ -83,13 +83,15 @@ const Products = (): JSX.Element => {
         />
         <ProductsList products={products} />
       </ProductsContainer>
-      <Pagination
-        total={productsCount}
-        onChange={handlePageClick}
-        page={parseInt(page as string, 10)}
-        perPage={ITEMS_PER_PAGE}
-      />
-    </>
+      <PaginationContainer>
+        <Pagination
+          total={productsCount}
+          onChange={handlePageClick}
+          page={parseInt(page as string, 10)}
+          perPage={ITEMS_PER_PAGE}
+        />
+      </PaginationContainer>
+    </MainPageContainer>
   );
 };
 
