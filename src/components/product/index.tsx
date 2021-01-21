@@ -6,6 +6,7 @@ import { getProductById } from '../../store/thunk-actions/products';
 import { resetProducts } from '../../store/slices/products';
 import type { RootState } from '../../store/types';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Product = (props: ConnectedRouterProps): JSX.Element | null => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
