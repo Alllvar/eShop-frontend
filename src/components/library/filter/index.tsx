@@ -3,7 +3,6 @@ import { FilterProps, FilterElement } from './types';
 import {
   FilterLiElement,
   FilterListContainer,
-  Title,
   Label,
   Input,
   FilterList,
@@ -47,7 +46,7 @@ const Filter = ({ handleFilterClick, categories }: FilterProps): JSX.Element => 
 
   return (
     <FilterListContainer>
-      <Title>My filter</Title>
+      <h1>My filter</h1>
       <FilterList>
         {renderFilterElements(categories)}
       </FilterList>

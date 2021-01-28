@@ -1,7 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Product } from '../../schemas/product';
+import { Review } from '../../schemas/review';
 
-const initialState : { data: Product[], count: number } = { data: [], count: 0 };
+const initialState : { data: Product[], count: number, reviews: Review[] } = {
+  data: [], count: 0, reviews: [],
+};
 
 const productsSlice = createSlice({
   name: 'products',
@@ -20,11 +23,15 @@ const productsSlice = createSlice({
     resetProducts(state) {
       state.data = [];
     },
+    addProductReviews(state, action: PayloadAction<Review[]>) {
+      state.reviews.length = 0;
+      state.reviews.push(...action.payload);
+    },
   },
 });
 
 export const {
-  addProducts, addProductsCount, addProduct, resetProducts,
+  addProducts, addProductsCount, addProduct, resetProducts, addProductReviews,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

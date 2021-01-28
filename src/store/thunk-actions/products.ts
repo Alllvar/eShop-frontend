@@ -1,5 +1,8 @@
 import fetch from '../../library/fetch';
-import { addProducts, addProductsCount, addProduct } from '../slices/products';
+import {
+  addProducts, addProductsCount, addProduct, addProductReviews,
+} from '../slices/products';
+import type { Review } from '../../schemas/review';
 import type { Product } from '../../schemas/product';
 import type { AppThunk, AppDispatch } from '../types';
 
@@ -23,4 +26,10 @@ export const getProductById = (id: string): AppThunk => async (dispatch: AppDisp
   const result: Product = await fetch(`/products/${id}`);
 
   dispatch(addProduct(result));
+};
+
+export const getProductreviews = (id: string): AppThunk => async (dispatch: AppDispatch) => {
+  const result: Review[] = await fetch(`/products/${id}/reviews`);
+
+  dispatch(addProductReviews(result));
 };
