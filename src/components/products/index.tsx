@@ -39,7 +39,7 @@ const Products = (): JSX.Element => {
       ),
     );
     dispatch(getProductsCount(categoryId as string[] || []));
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     dispatch(getCategories());
