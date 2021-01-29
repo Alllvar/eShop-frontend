@@ -7,7 +7,6 @@ import { resetProducts } from '../../store/slices/products';
 import type { RootState } from '../../store/types';
 import {
   ProductContainer,
-  ProductPhotoWrap,
   ProductContentWrap,
   ProductPhoto,
   ReviewContainer,
@@ -37,13 +36,21 @@ const Product = (props: ConnectedRouterProps): JSX.Element | null => {
     };
   }, []);
 
+  const renderReviews = () => reviews.map((review) => (
+    <ReviewContainer>
+      <ReviewTitle>{review.title}</ReviewTitle>
+      <div>{review.description}</div>
+      <div>{review.date}</div>
+    </ReviewContainer>
+  ));
+
   return (
     product
       ? (
         <ProductContainer>
-          <ProductPhotoWrap>
-            <ProductPhoto src={product.image} className="img" alt={product.name} width={300} />
-          </ProductPhotoWrap>
+          <div>
+            <ProductPhoto src={product.image} alt={product.name} width={300} />
+          </div>
           <ProductContentWrap>
             <h1 className="title">{product.name}</h1>
             <div className="price">
@@ -51,13 +58,7 @@ const Product = (props: ConnectedRouterProps): JSX.Element | null => {
               $
             </div>
             <div className="description">{product.description}</div>
-            {reviews.map((review) => (
-              <ReviewContainer>
-                <ReviewTitle>{review.title}</ReviewTitle>
-                <div>{review.description}</div>
-                <div>{review.date}</div>
-              </ReviewContainer>
-            )) }
+            {renderReviews()}
           </ProductContentWrap>
         </ProductContainer>
       )

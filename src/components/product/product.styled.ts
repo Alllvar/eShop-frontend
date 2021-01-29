@@ -10,10 +10,6 @@ export const ProductContainer = styled.div`
     padding-top: 100px;
 `;
 
-export const ProductPhotoWrap = styled.div`
-    
-`;
-
 export const ProductPhoto = styled.img`
   width: 350px;
   height: 250px;
