@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FilterProps, FilterElement } from './types';
+import RangeSlider from '../range/index';
 import {
   FilterLiElement,
   FilterListContainer,
@@ -50,6 +51,7 @@ const Filter = ({ handleFilterClick, categories }: FilterProps): JSX.Element => 
       <FilterList>
         {renderFilterElements(categories)}
       </FilterList>
+      <RangeSlider />
     </FilterListContainer>
   );
 };
