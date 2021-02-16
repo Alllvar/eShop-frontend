@@ -9,7 +9,7 @@ import {
   FilterList,
 } from './filter.styled';
 
-const Filter = ({ handleFilterClick, categories }: FilterProps): JSX.Element => {
+const Filter = ({ handleFilterClick, categories, handleRange }: FilterProps): JSX.Element => {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +51,7 @@ const Filter = ({ handleFilterClick, categories }: FilterProps): JSX.Element => 
       <FilterList>
         {renderFilterElements(categories)}
       </FilterList>
-      <RangeSlider />
+      <RangeSlider handleRange={handleRange} priceFrom={0} priceTo={10000} />
     </FilterListContainer>
   );
 };

@@ -32,7 +32,8 @@ const Product = (props: ConnectedRouterProps): JSX.Element | null => {
     dispatch(getProductreviews(id));
 
     return () => {
-      dispatch(resetProducts());
+      // eslint-disable-next-line new-cap
+      dispatch(new resetProducts());
     };
   }, []);
 

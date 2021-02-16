@@ -2,8 +2,9 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Product } from '../../schemas/product';
 import { Review } from '../../schemas/review';
 
-const initialState : { data: Product[], count: number, reviews: Review[] } = {
-  data: [], count: 0, reviews: [],
+// eslint-disable-next-line max-len
+const initialState : { data: Product[], count: number, reviews: Review[], priceFrom: number, priceTo: number } = {
+  data: [], count: 0, reviews: [], priceFrom: 0, priceTo: 90,
 };
 
 const productsSlice = createSlice({
@@ -27,11 +28,15 @@ const productsSlice = createSlice({
       state.reviews.length = 0;
       state.reviews.push(...action.payload);
     },
+    addProductsPrice(state) {
+      state.priceFrom = 0;
+      state.priceTo = 90;
+    },
   },
 });
 
 export const {
-  addProducts, addProductsCount, addProduct, resetProducts, addProductReviews,
+  addProducts, addProductsCount, addProduct, addProductReviews, addProductsPrice,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

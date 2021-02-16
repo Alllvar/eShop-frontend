@@ -1,15 +1,16 @@
 import fetch from '../../library/fetch';
 import {
-  addProducts, addProductsCount, addProduct, addProductReviews,
+  addProducts, addProductsCount, addProduct, addProductReviews, addProductsPrice,
 } from '../slices/products';
 import type { Review } from '../../schemas/review';
 import type { Product } from '../../schemas/product';
 import type { AppThunk, AppDispatch } from '../types';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type ProductParams = { skip?: number, limit?: number, categoryId?: string[] };
 
 // eslint-disable-next-line max-len
-export const getProducts = (queryParams: ProductParams): AppThunk => async (dispatch: AppDispatch) => {
+export const getProducts = (queryParams: { priceFrom: number; limit: number; skip: number; priceTo: number; categoryId: string[] }): AppThunk => async (dispatch: AppDispatch) => {
   const result: Product[] = await fetch('/products', { queryParams });
 
   dispatch(addProducts(result));
@@ -32,4 +33,13 @@ export const getProductreviews = (id: string): AppThunk => async (dispatch: AppD
   const result: Review[] = await fetch(`/products/${id}/reviews`);
 
   dispatch(addProductReviews(result));
+};
+
+export const getProductsPrice = (
+  priceFrom: number, priceTo: number,
+): AppThunk => async (dispatch: AppDispatch) => {
+  const result: Product[] = await fetch(`/products?priceFrom=${priceFrom}%priceTo=${priceTo}`);
+
+  // @ts-ignore
+  dispatch(addProductsPrice(result));
 };
