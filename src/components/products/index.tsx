@@ -26,7 +26,11 @@ const Products = (): JSX.Element => {
   const productsCount = useSelector(
     (state: RootState) => state.products.count,
   );
-  const { page = '1', categoryId } = qs.parse(search, { parseArrays: true, ignoreQueryPrefix: true });
+  const {
+    page = '1', categoryId, priceFrom = '0', priceTo = '10000',
+  } = qs.parse(
+    search, { parseArrays: true, ignoreQueryPrefix: true },
+  );
 
   useEffect(() => {
     dispatch(
@@ -35,18 +39,21 @@ const Products = (): JSX.Element => {
           limit: ITEMS_PER_PAGE,
           skip: (parseInt(page as string, 10) - 1) * ITEMS_PER_PAGE,
           categoryId: categoryId as string[] || [],
+          priceFrom: parseInt(priceFrom as string, 10),
+          priceTo: parseInt(priceTo as string, 10),
         },
       ),
     );
     dispatch(getProductsCount(categoryId as string[] || []));
-  }, [page]);
+  }, [page, categoryId, priceFrom, priceTo]);
 
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getProductsCount());
 
     return () => {
-      dispatch(resetProducts());
+      // eslint-disable-next-line new-cap
+      dispatch(new resetProducts());
     };
   }, []);
 
@@ -55,7 +62,23 @@ const Products = (): JSX.Element => {
     dispatch(
       push({
         search: qs.stringify(
-          { categoryId, page: 1 },
+          {
+            priceFrom, priceTo, categoryId, page: 1,
+          },
+          { addQueryPrefix: true, skipNulls: true },
+        ),
+      }),
+    );
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  const handleRange = (priceFrom: number, priceTo: number) => {
+    dispatch(
+      push({
+        search: qs.stringify(
+          {
+            priceFrom, priceTo, categoryId, page,
+          },
           { addQueryPrefix: true, skipNulls: true },
         ),
       }),
@@ -67,7 +90,9 @@ const Products = (): JSX.Element => {
     dispatch(
       push({
         search: qs.stringify(
-          { categoryId, page },
+          {
+            priceFrom, priceTo, categoryId, page,
+          },
           { addQueryPrefix: true, skipNulls: true },
         ),
       }),
@@ -80,6 +105,7 @@ const Products = (): JSX.Element => {
         <Filter
           categories={categories}
           handleFilterClick={handleFilterClick}
+          handleRange={handleRange}
         />
         <ProductsList products={products} />
       </ProductsContainer>

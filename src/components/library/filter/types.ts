@@ -1,6 +1,7 @@
 export type FilterProps = {
   handleFilterClick: (id: string[]) => void,
-  categories: { name: string, _id: string }[]
+  categories: { name: string, _id: string }[],
+  handleRange: (priceFrom: number, priceTo: number) => void
 };
 
 export type FilterElement = {
