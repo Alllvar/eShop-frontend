@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ConnectedRouterProps } from 'connected-react-router';
 import { getProductById, getProductreviews } from '../../store/thunk-actions/products';
-import { resetProducts } from '../../store/slices/products';
+// import { resetProducts } from '../../store/slices/products';
 import type { RootState } from '../../store/types';
 import {
   ProductContainer,
@@ -33,7 +33,7 @@ const Product = (props: ConnectedRouterProps): JSX.Element | null => {
 
     return () => {
       // eslint-disable-next-line new-cap
-      dispatch(new resetProducts());
+      // dispatch(new resetProducts());
     };
   }, []);
 

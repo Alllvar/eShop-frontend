@@ -3,8 +3,16 @@ import { Product } from '../../schemas/product';
 import { Review } from '../../schemas/review';
 
 // eslint-disable-next-line max-len
-const initialState : { data: Product[], count: number, reviews: Review[], priceFrom: number, priceTo: number } = {
-  data: [], count: 0, reviews: [], priceFrom: 0, priceTo: 90,
+const initialState : {
+  data: Product[],
+  count: number,
+  reviews: Review[],
+  priceFrom: number,
+  priceTo: number,
+  sortBy: string,
+  sortDirection: string
+} = {
+  data: [], count: 0, reviews: [], priceFrom: 0, priceTo: 10000, sortBy: 'name', sortDirection: 'desc',
 };
 
 const productsSlice = createSlice({
@@ -30,13 +38,21 @@ const productsSlice = createSlice({
     },
     addProductsPrice(state) {
       state.priceFrom = 0;
-      state.priceTo = 90;
+      state.priceTo = 10000;
+    },
+    addProductsSort(state) {
+      state.sortBy = 'name';
+      state.sortDirection = 'desc';
     },
   },
 });
 
 export const {
-  addProducts, addProductsCount, addProduct, addProductReviews, addProductsPrice,
+  addProducts, addProductsCount, addProduct, addProductReviews, addProductsPrice, addProductsSort,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+// export class resetProducts {
+// }

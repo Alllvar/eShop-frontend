@@ -8,7 +8,7 @@ import ProductsList from './products-list';
 import { getCategories } from '../../store/thunk-actions/categories';
 import { getProducts, getProductsCount } from '../../store/thunk-actions/products';
 import { ITEMS_PER_PAGE } from '../../constants/pagination';
-import { resetProducts } from '../../store/slices/products';
+// import { resetProducts } from '../../store/slices/products';
 import { ProductsContainer, PaginationContainer, MainPageContainer } from './products.styled';
 import type { RootState } from '../../store/types';
 
@@ -27,7 +27,7 @@ const Products = (): JSX.Element => {
     (state: RootState) => state.products.count,
   );
   const {
-    page = '1', categoryId, priceFrom = '0', priceTo = '10000',
+    page = '1', categoryId, priceFrom = '0', priceTo = '10000', sortBy = 'name', sortDirection = 'desc',
   } = qs.parse(
     search, { parseArrays: true, ignoreQueryPrefix: true },
   );
@@ -41,11 +41,13 @@ const Products = (): JSX.Element => {
           categoryId: categoryId as string[] || [],
           priceFrom: parseInt(priceFrom as string, 10),
           priceTo: parseInt(priceTo as string, 10),
+          sortBy: sortBy as string,
+          sortDirection: sortDirection as string,
         },
       ),
     );
     dispatch(getProductsCount(categoryId as string[] || []));
-  }, [page, categoryId, priceFrom, priceTo]);
+  }, [page, categoryId, priceFrom, priceTo, sortBy, sortDirection]);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -53,7 +55,7 @@ const Products = (): JSX.Element => {
 
     return () => {
       // eslint-disable-next-line new-cap
-      dispatch(new resetProducts());
+      // dispatch(new resetProducts());
     };
   }, []);
 
@@ -63,7 +65,7 @@ const Products = (): JSX.Element => {
       push({
         search: qs.stringify(
           {
-            priceFrom, priceTo, categoryId, page: 1,
+            priceFrom, priceTo, categoryId, page: 1, sortBy, sortDirection,
           },
           { addQueryPrefix: true, skipNulls: true },
         ),
@@ -77,9 +79,24 @@ const Products = (): JSX.Element => {
       push({
         search: qs.stringify(
           {
-            priceFrom, priceTo, categoryId, page,
+            priceFrom, priceTo, categoryId, page, sortBy, sortDirection,
           },
           { addQueryPrefix: true, skipNulls: true },
+        ),
+      }),
+    );
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  const handleSort = (sortBy: string, sortDirection: string) => {
+    dispatch(
+      push({
+        search: qs.stringify(
+          {
+            priceFrom, priceTo, categoryId, page, sortBy, sortDirection,
+          }, {
+            addQueryPrefix: true, skipNulls: true,
+          },
         ),
       }),
     );
@@ -91,7 +108,7 @@ const Products = (): JSX.Element => {
       push({
         search: qs.stringify(
           {
-            priceFrom, priceTo, categoryId, page,
+            priceFrom, priceTo, categoryId, page, sortBy, sortDirection,
           },
           { addQueryPrefix: true, skipNulls: true },
         ),
@@ -106,6 +123,7 @@ const Products = (): JSX.Element => {
           categories={categories}
           handleFilterClick={handleFilterClick}
           handleRange={handleRange}
+          handleSort={handleSort}
         />
         <ProductsList products={products} />
       </ProductsContainer>
