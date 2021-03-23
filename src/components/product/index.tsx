@@ -10,7 +10,9 @@ import {
   ProductContentWrap,
   ProductPhoto,
   ReviewContainer,
+  ReviewWrap,
   ReviewTitle,
+  Container,
 } from './product.styled';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -24,44 +26,61 @@ const Product = (props: ConnectedRouterProps): JSX.Element | null => {
   const reviews = useSelector(
     (state: RootState) => state.products.reviews,
   );
-    // eslint-disable-next-line no-underscore-dangle
+
+  // console.log(reviews[0].evaluation, '==============================');
+
+  // eslint-disable-next-line no-underscore-dangle
   const product = products.find((item) => item._id === id);
+
+  const getAllEvaluations: any = reviews.map((review) => review.evaluation);
+  const sumOfAllEvaluation: any = getAllEvaluations.reduce((a: number, b: number) => a + b, 0);
+  const averageEvaluation: any = sumOfAllEvaluation / getAllEvaluations.length;
 
   useEffect(() => {
     dispatch(getProductById(id));
     dispatch(getProductreviews(id));
 
     return () => {
-      // eslint-disable-next-line new-cap
-      // dispatch(new resetProducts());
+      // dispatch(resetProducts());
     };
   }, []);
 
   const renderReviews = () => reviews.map((review) => (
-    <ReviewContainer>
+    <ReviewWrap>
       <ReviewTitle>{review.title}</ReviewTitle>
       <div>{review.description}</div>
+      <div>{review.evaluation}</div>
       <div>{review.date}</div>
-    </ReviewContainer>
+    </ReviewWrap>
   ));
 
   return (
     product
       ? (
-        <ProductContainer>
-          <div>
-            <ProductPhoto src={product.image} alt={product.name} width={300} />
-          </div>
-          <ProductContentWrap>
-            <h1 className="title">{product.name}</h1>
-            <div className="price">
-              {product.price}
-              $
+        <Container>
+          <ProductContainer>
+            <div>
+              <ProductPhoto src={product.image} alt={product.name} width={300} />
             </div>
-            <div className="description">{product.description}</div>
+            <ProductContentWrap>
+              <h1 className="title">{product.name}</h1>
+              <div className="price">
+                {product.price}
+                $
+              </div>
+              <div className="description">{product.description}</div>
+              <div>
+                Rating:
+                {' '}
+                {averageEvaluation}
+              </div>
+            </ProductContentWrap>
+          </ProductContainer>
+          <ReviewContainer>
+            <h2>Products reviews:</h2>
             {renderReviews()}
-          </ProductContentWrap>
-        </ProductContainer>
+          </ReviewContainer>
+        </Container>
       )
       : null
   );

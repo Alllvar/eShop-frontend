@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    //margin-bottom: 30px;
+    //width: 800px;
+    align-items: center;
+    //font-family: Lucida Console, Courier, monospace;
+    //padding-top: 100px;
+`;
+
 export const ProductContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -43,7 +53,12 @@ export const Description = styled.h4`
     font-size: 16px;
 `;
 
-export const ReviewContainer = styled.h4`
+export const ReviewContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const ReviewWrap = styled.h4`
   display: flex;
   flex-direction: column;
   justify-content: center;

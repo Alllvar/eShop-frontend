@@ -1,6 +1,6 @@
 import fetch from '../../library/fetch';
 import {
-  addProducts, addProductsCount, addProduct, addProductReviews, addProductsPrice, addProductsSort
+  addProducts, addProductsCount, addProduct, addProductReviews, addProductsPrice,
 } from '../slices/products';
 import type { Review } from '../../schemas/review';
 import type { Product } from '../../schemas/product';

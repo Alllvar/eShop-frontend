@@ -3,4 +3,5 @@ export type Review = {
   description : string,
   date : number,
   productId : string,
+  evaluation: number
 };
